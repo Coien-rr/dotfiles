@@ -1,12 +1,13 @@
 # alias
 alias vi="nvim"
 alias reload="source ~/.zshrc"
-alias proxy="export http_proxy=http://127.0.0.1:15732;export https_proxy=http://127.0.0.1:15732;export ALL_PROXY=socks5://127.0.0.1:15732"
-alias unproxy="unset http_proxy;unset https_proxy;unset ALL_PROXY"
-alias net="hdu-cli net login --username 232050221 --password LC@070236 --save"
-alias gcc="gcc-14"
-alias g++="g++-14"
-
+alias lsl="eza -l --icons"
+alias lsa="eza -l -a --icons"
+alias ls="eza --icons"
+alias lg="eza -lag --icons"
+alias aget="aria2c"
+export RUSTUP_DIST_SERVER="https://rsproxy.cn"
+export RUSTUP_UPDATE_ROOT="https://rsproxy.cn/rustup"
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
@@ -20,36 +21,16 @@ source "$HOME/.zinit/bin/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
+
 zinit ice depth=1 atload"!source ~/.theme.zsh" lucid nocd
 zinit light romkatv/powerlevel10k
 
-alias nvim="~/nvim-macos/bin/nvim"
-alias nvc="rm -rf ~/.cache/nvim/"
-alias c="cd ~/Code/"
-alias nc="cd ~/.config/nvim/"
-alias ls="exa --icons"
-alias lsa="exa --icons -a"
-alias lst="exa --icons -T"
-alias lsl="exa --icons -l --color=always -a"
-alias aget="aria2c"
-alias cooper="ssh -i /Users/cooper/BT7274_Mac_mini.pem ubuntu@1.116.150.46"
-alias istar="ssh -i ~/.ssh/star lc@10.4.177.199"
-alias star="kitten ssh -i ~/.ssh/star lc@10.4.177.199"
-alias ilab="ssh lab401@10.4.177.198"
-alias lab="kitten ssh lc@10.4.177.198"
-export PATH="/opt/homebrew/bin:$PATH"
-export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.ustc.edu.cn/brew.git"
-export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.ustc.edu.cn/homebrew-core.git"
-export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles"
-export HOMEBREW_API_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles/api"
-# eval "$(zoxide init zsh)"
-
-# #=== OH-MY-ZSH & PREZTO PLUGINS =======================
-zinit for \
-      OMZL::{'history','completion','git','grep','key-bindings'}.zsh
-
-zinit wait lucid for \
-      OMZP::{'extract','fzf','git','sudo'}
+# # #=== OH-MY-ZSH & PREZTO PLUGINS =======================
+# zinit for \
+#       OMZL::{'history','completion','git','grep','key-bindings'}.zsh
+#
+# zinit wait lucid for \
+#       OMZP::{'extract','fzf','git','sudo'}
 
 # Plugins
 zinit ice depth=1 wait lucid
@@ -70,7 +51,7 @@ zinit light wfxr/forgit
 zinit ice depth=1 wait"2" lucid
 zinit light hlissner/zsh-autopair
 
-zinit load ellie/atuin
+zinit load atuinsh/atuin
 
 # create tmux new session with window name
 tn() {
@@ -79,24 +60,75 @@ tn() {
   tmux a -t $1
 }
 
+# open file
+fo() {
+  IFS=$'\n' out=($(fzf --query="$1" --multi))
+  key=$(head -1 <<< "$out")
+  file=$(head -2 <<< "$out" | tail -1)
+  if [ -n "$file" ]; then
+    [ "$key" = ctrl-o ] && open "$file" || ${EDITOR:-nvim} "$file"
+  fi
+}
+
+# cd directory and open file can pass word
+fcd() {
+  local dir
+  dir=$(fd --hidden --type d "$1" . $HOME | fzf --preview 'tree -C {}' +m) && cd "$dir"
+}
+
+# cd directory and open file can pass word
+co() {
+  local dir
+  dir=$(fd --hidden --type d "$1" . $HOME | fzf --preview 'tree -C {}' +m) && cd "$dir" && fo
+}
+
+# find-in-file - usage: fif <searchTerm>
+fif() {
+  if [ ! "$#" -gt 0 ]; then echo "Need a string to search for!"; return 1; fi
+  file=$(rg --files-with-matches --no-messages "$1" | fzf --preview "highlight -O ansi -l {} 2> /dev/null | rg --colors 'match:bg:yellow' --ignore-case --pretty --context 10 '$1' || rg --ignore-case --pretty --context 10 '$1' {}")
+  nvim $file
+}
+
+# open yazi
+function yy() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
+
+function upm () {
+    sudo reflector \
+        --country China \
+        --protocol https \
+        --latest 3 \
+        --save /etc/pacman.d/mirrorlist
+    echo "updated pacman.d/mirrorlist"
+}
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-eval "$(atuin init zsh)"
-export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
-export PATH="/Users/cooper/go/bin:$PATH"
-# export PATH="/home/cooper/nvim-macos/bin:$PATH"
+# if [ "$TMUX" = "" ]; then tn work; fi
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/lc/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/lc/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/lc/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/lc/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+#
+# export RUSTUP_DIST_SERVER="https://rsproxy.cn"
+# export RUSTUP_UPDATE_ROOT="https://rsproxy.cn/rustup"
 
-export RUSTUP_DIST_SERVER="https://rsproxy.cn"
-export RUSTUP_UPDATE_ROOT="https://rsproxy.cn/rustup"
-
-export CC=/opt/homebrew/opt/llvm/bin/clang
-export CXX=/opt/homebrew/opt/llvm/bin/clang++
-
-export OpenMP_ROOT=$(brew --prefix)/opt/libomp
-export LDFLAGS="-L/opt/homebrew/opt/libomp/lib"
-export CPPFLAGS="-I/opt/homebrew/opt/libomp/include"
-
-export LDFLAGS="-L/opt/homebrew/opt/openblas/lib"
-export CPPFLAGS="-I/opt/homebrew/opt/openblas/include"
-
+alias seeproxy="env | grep -E 'http_proxy|https_proxy'"
+alias anns="cd ~/Code/ANNS"
+alias cpp="cd ~/Code/cpp/"

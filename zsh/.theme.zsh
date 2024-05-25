@@ -52,7 +52,7 @@
     # context                   # user@host
     dir                       # current directory
     vcs                       # git status
-    command_execution_time    # previous command duratin
+    command_execution_time    # previous command duration
     # =========================[ Line #2 ]=========================
     newline                   # \n
     prompt_char               # prompt symbol
@@ -66,7 +66,7 @@
     # context                 # user@host
     # time                    # current time
     # =========================[ Line #2 ]=========================
-    # newline                   # \n
+    newline                   # \n
   )
 
   # Basic style options that define the overall prompt look.
@@ -84,10 +84,12 @@
   typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_{VIINS,VICMD,VIVIS}_FOREGROUND=$cyan
   # Red prompt symbol if the last command failed.
   typeset -g POWERLEVEL9K_PROMPT_CHAR_ERROR_{VIINS,VICMD,VIVIS}_FOREGROUND=$red
-  # Default OK prompt symbol.
-  typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_VIINS_CONTENT_EXPANSION="󱃮"
-  # Default ERROR prompt symbol.
-  typeset -g POWERLEVEL9K_PROMPT_CHAR_ERROR_VIINS_CONTENT_EXPANSION='󰒲 '
+  # Default prompt symbol.
+  typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_VIINS_CONTENT_EXPANSION='󱃮'
+  # typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_VIINS_CONTENT_EXPANSION=' '
+  # Default prompt symbol.
+  typeset -g POWERLEVEL9K_PROMPT_CHAR_ERROR_VIINS_CONTENT_EXPANSION=''
+
   # Prompt symbol in command vi mode.
   typeset -g POWERLEVEL9K_PROMPT_CHAR_{OK,ERROR}_VICMD_CONTENT_EXPANSION='❮'
   # Prompt symbol in visual vi mode is the same as in command mode.
@@ -137,8 +139,7 @@
   typeset -g POWERLEVEL9K_VCS_GIT_HOOKS=(vcs-detect-changes git-untracked git-aheadbehind)
   # show branch icon
   # typeset -g POWERLEVEL9K_VCS_BRANCH_ICON='󰹧'
-  # typeset -g POWERLEVEL9K_VCS_BRANCH_ICON=' '
-  typeset -g POWERLEVEL9K_VCS_BRANCH_ICON=' '
+  typeset -g POWERLEVEL9K_VCS_BRANCH_ICON=' '
   # When in detached HEAD state, show @commit where branch normally goes.
   typeset -g POWERLEVEL9K_VCS_COMMIT_ICON='@'
   # Don't show staged, unstaged, untracked indicators.
