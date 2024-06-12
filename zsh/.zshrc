@@ -6,8 +6,6 @@ alias lsa="eza -l -a --icons"
 alias ls="eza --icons"
 alias lg="eza -lag --icons"
 alias aget="aria2c"
-export RUSTUP_DIST_SERVER="https://rsproxy.cn"
-export RUSTUP_UPDATE_ROOT="https://rsproxy.cn/rustup"
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
@@ -51,8 +49,6 @@ zinit light wfxr/forgit
 zinit ice depth=1 wait"2" lucid
 zinit light hlissner/zsh-autopair
 
-zinit load atuinsh/atuin
-
 # create tmux new session with window name
 tn() {
   tmux new-session -d -s $1
@@ -89,7 +85,6 @@ fif() {
   nvim $file
 }
 
-# open yazi
 function yy() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
 	yazi "$@" --cwd-file="$tmp"
@@ -97,15 +92,6 @@ function yy() {
 		cd -- "$cwd"
 	fi
 	rm -f -- "$tmp"
-}
-
-function upm () {
-    sudo reflector \
-        --country China \
-        --protocol https \
-        --latest 3 \
-        --save /etc/pacman.d/mirrorlist
-    echo "updated pacman.d/mirrorlist"
 }
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -125,10 +111,15 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-#
-# export RUSTUP_DIST_SERVER="https://rsproxy.cn"
-# export RUSTUP_UPDATE_ROOT="https://rsproxy.cn/rustup"
 
+export RUSTUP_DIST_SERVER="https://rsproxy.cn"
+export RUSTUP_UPDATE_ROOT="https://rsproxy.cn/rustup"
+export PATH="$PATH:/usr/local/go/bin"
+export PATH="${PATH}:`go env GOPATH`/bin"
+
+alias proxy_start="sudo bash ~/clash-for-linux/start.sh && source /etc/profile.d/clash.sh"
+alias proxy_shutdown="sudo bash ~/clash-for-linux/shutdown.sh"
 alias seeproxy="env | grep -E 'http_proxy|https_proxy'"
-alias anns="cd ~/Code/ANNS"
-alias cpp="cd ~/Code/cpp/"
+alias anns="cd Code/ANNS"
+
+eval "$(atuin init zsh)"
