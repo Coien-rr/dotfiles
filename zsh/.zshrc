@@ -6,6 +6,8 @@ alias unproxy="unset http_proxy;unset https_proxy;unset ALL_PROXY"
 alias net="hdu-cli net login --username 232050221 --password LC@070236 --save"
 alias gcc="gcc-14"
 alias g++="g++-14"
+alias anns="cd ~/Code/ANNS/"
+alias cpp="cd ~/Code/CPP/"
 
 
 ### Added by Zinit's installer
@@ -23,20 +25,21 @@ autoload -Uz _zinit
 zinit ice depth=1 atload"!source ~/.theme.zsh" lucid nocd
 zinit light romkatv/powerlevel10k
 
-alias nvim="~/nvim-macos/bin/nvim"
+alias nvim="~/nvim-macos-arm64/bin/nvim"
 alias nvc="rm -rf ~/.cache/nvim/"
 alias c="cd ~/Code/"
 alias nc="cd ~/.config/nvim/"
 alias ls="exa --icons"
-alias lsa="exa --icons -a"
+alias lsa="exa --icons -l --color=always -a"
 alias lst="exa --icons -T"
-alias lsl="exa --icons -l --color=always -a"
+alias lsl="exa --icons -l --color=always"
 alias aget="aria2c"
 alias cooper="ssh -i /Users/cooper/BT7274_Mac_mini.pem ubuntu@1.116.150.46"
 alias istar="ssh -i ~/.ssh/star lc@10.4.177.199"
 alias star="kitten ssh -i ~/.ssh/star lc@10.4.177.199"
 alias ilab="ssh lab401@10.4.177.198"
-alias lab="kitten ssh lc@10.4.177.198"
+alias tiny="kitten ssh -i ~/.ssh/tiny byte@10.4.177.78"
+alias lab="kitten ssh -i ~/.ssh/lab401 lc@10.4.177.198"
 export PATH="/opt/homebrew/bin:$PATH"
 export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.ustc.edu.cn/brew.git"
 export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.ustc.edu.cn/homebrew-core.git"
@@ -79,6 +82,15 @@ tn() {
   tmux a -t $1
 }
 
+function yy() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
+
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -90,8 +102,11 @@ export PATH="/Users/cooper/go/bin:$PATH"
 export RUSTUP_DIST_SERVER="https://rsproxy.cn"
 export RUSTUP_UPDATE_ROOT="https://rsproxy.cn/rustup"
 
-export CC=/opt/homebrew/opt/llvm/bin/clang
-export CXX=/opt/homebrew/opt/llvm/bin/clang++
+export CC='/opt/homebrew/opt/llvm/bin/clang'
+export CXX='/opt/homebrew/opt/llvm/bin/clang++'
+
+export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
 
 export OpenMP_ROOT=$(brew --prefix)/opt/libomp
 export LDFLAGS="-L/opt/homebrew/opt/libomp/lib"
@@ -99,4 +114,3 @@ export CPPFLAGS="-I/opt/homebrew/opt/libomp/include"
 
 export LDFLAGS="-L/opt/homebrew/opt/openblas/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/openblas/include"
-
