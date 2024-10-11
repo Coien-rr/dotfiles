@@ -6,8 +6,14 @@ alias lsa="eza -l -a --icons"
 alias ls="eza --icons"
 alias lg="eza -lag --icons"
 alias aget="aria2c"
-export RUSTUP_DIST_SERVER="https://rsproxy.cn"
-export RUSTUP_UPDATE_ROOT="https://rsproxy.cn/rustup"
+alias code="cd ~/Code/"
+alias anns="cd ~/Code/ANNS"
+alias cpp="cd ~/Code/cpp/"
+alias nc="cd ~/.config/nvim/"
+alias net="hdu-cli net login"
+alias seeproxy="env | grep -E 'http_proxy|https_proxy'"
+alias proxy_start="sudo bash ~/clash-for-linux/start.sh"
+alias proxy_shutdown="sudo bash ~/clash-for-linux/shutdown.sh"
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
@@ -125,10 +131,5 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-#
-# export RUSTUP_DIST_SERVER="https://rsproxy.cn"
-# export RUSTUP_UPDATE_ROOT="https://rsproxy.cn/rustup"
 
-alias seeproxy="env | grep -E 'http_proxy|https_proxy'"
-alias anns="cd ~/Code/ANNS"
-alias cpp="cd ~/Code/cpp/"
+
