@@ -8,6 +8,9 @@ alias gcc="gcc-14"
 alias g++="g++-14"
 alias anns="cd ~/Code/ANNS/"
 alias cpp="cd ~/Code/CPP/"
+alias code="cd ~/Code/"
+alias lg="lazygit"
+
 
 
 ### Added by Zinit's installer
@@ -27,7 +30,6 @@ zinit light romkatv/powerlevel10k
 
 alias nvim="~/nvim-macos-arm64/bin/nvim"
 alias nvc="rm -rf ~/.cache/nvim/"
-alias c="cd ~/Code/"
 alias nc="cd ~/.config/nvim/"
 alias ls="exa --icons"
 alias lsa="exa --icons -l --color=always -a"

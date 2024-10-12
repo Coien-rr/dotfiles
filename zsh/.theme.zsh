@@ -64,7 +64,7 @@
   typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
     # =========================[ Line #1 ]=========================
     # command_execution_time  # previous command duration
-    virtualenv              # python virtual environment
+    # virtualenv              # python virtual environment
     # context                 # user@host
     # time                    # current time
     # =========================[ Line #2 ]=========================
@@ -87,8 +87,8 @@
   # Red prompt symbol if the last command failed.
   typeset -g POWERLEVEL9K_PROMPT_CHAR_ERROR_{VIINS,VICMD,VIVIS}_FOREGROUND=$red
   # Default OK prompt symbol.
-  typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_VIINS_CONTENT_EXPANSION=""
-  # typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_VIINS_CONTENT_EXPANSION="󱃮"
+  # typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_VIINS_CONTENT_EXPANSION=""
+  typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_VIINS_CONTENT_EXPANSION="󱃮"
   # Default ERROR prompt symbol.
   typeset -g POWERLEVEL9K_PROMPT_CHAR_ERROR_VIINS_CONTENT_EXPANSION='󰒲 '
   # Prompt symbol in command vi mode.
