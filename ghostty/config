@@ -16,7 +16,7 @@
 #
 # A future update will allow custom themes to be installed in certain
 # directories.
-theme = catppuccin-mocha
+theme = Tinacious Design (Dark)
 
 # Font size in points. This value can be a non-integer and the nearest integer
 # pixel size will be selected. If you have a high dpi display where 1pt = 2px
@@ -29,7 +29,7 @@ theme = catppuccin-mocha
 # depending on your `window-inherit-font-size` setting. If that setting is
 # true, only the first window will be affected by this change since all
 # subsequent windows will inherit the font size of the previous window.
-font-size = 14
+font-size = 14.5
 
 
 # Hide the mouse immediately when typing. The mouse becomes visible again when
@@ -61,13 +61,13 @@ window-decoration = true
 # will appear in the logs.
 #
 # Changing these values will only apply after restart.
-window-padding-x = 16
-window-padding-y = 10
+window-padding-x = 3
+window-padding-y = 0
 
 # The opacity level (opposite of transparency) of the background. A value of
 # 1 is fully opaque and a value of 0 is fully transparent. A value less than 0
 # or greater than 1 will be clamped to the nearest valid value.
-background-opacity = 0.9
+background-opacity = 0.7
 
 # A positive value enables blurring of the background when background-opacity
 # is less than 1. The value is the blur radius to apply. A value of 20
@@ -105,17 +105,30 @@ background-blur-radius = 40
 # Changing this configuration at runtime will only affect new terminals, i.e.
 # new windows, tabs, etc.
 # Default font
-font-family             = "Operator Mono SSm Lig"
-font-style              = "Book"
+# font-family             = "Operator Mono SSm Lig"
+# font-style              = "Book"
+# # Bold
+# font-family-bold        = "Operator Mono SSm Lig"
+# font-style-bold         = "Medium"
+# # Italic
+# font-family-italic      = "Operator Mono SSm Lig"
+# font-style-italic       = "BookItalic"
+# # Bold and Italic
+# font-family-bold-italic = "Operator Mono SSm Lig"
+# font-style-bold-italic  = "MediumItalic"
+
+# Default font
+font-family             = "Rec Mono Linear"
+font-style              = "Regular"
 # Bold
-font-family-bold        = "Operator Mono SSm Lig"
-font-style-bold         = "Medium"
+font-family-bold        = "Rec Mono Linear"
+font-style-bold         = "Bold"
 # Italic
-font-family-italic      = "Operator Mono SSm Lig"
-font-style-italic       = "BookItalic"
+font-family-italic      = "Rec Mono Casual"
+font-style-italic       = "Italic"
 # Bold and Italic
-font-family-bold-italic = "Operator Mono SSm Lig"
-font-style-bold-italic  = "MediumItalic"
+font-family-bold-italic = "Rec Mono Casual"
+font-style-bold-italic  = "Italic"
 
 macos-option-as-alt = true
 
