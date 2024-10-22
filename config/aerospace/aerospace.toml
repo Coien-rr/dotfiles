@@ -114,6 +114,7 @@ cmd-2 = 'workspace Dev'             # Terminal && Development
 cmd-3 = 'workspace Browsers'        # Browsers
 cmd-4 = 'workspace Productivity'    # Productivity
 cmd-5 = 'workspace Space'           # Something temporary
+cmd-6 = 'workspace Code'           # For VS Code
 
 # alt-b = 'workspace B' # Browsers
 # alt-c = 'workspace C' # Chat apps
@@ -214,9 +215,6 @@ run = 'move-node-to-workspace Dev'
 if.app-id = 'com.facebook.fbvscode'
 run = 'move-node-to-workspace Dev'
 
-[[on-window-detected]]
-if.app-id = 'com.microsoft.VSCode'
-run = 'move-node-to-workspace Dev'
 
 ## Floaters
 
@@ -273,4 +271,10 @@ run = 'move-node-to-workspace Productivity'
 [[on-window-detected]]
 if.app-id = 'com.shapr3d.shapr'
 run = 'move-node-to-workspace Productivity'
+
+## Code
+
+[[on-window-detected]]
+if.app-id = 'com.microsoft.VSCode'
+run = 'move-node-to-workspace Code'
 
