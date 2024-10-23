@@ -17,6 +17,7 @@
 # A future update will allow custom themes to be installed in certain
 # directories.
 theme = Tinacious Design (Dark)
+background = 16161e
 
 # Font size in points. This value can be a non-integer and the nearest integer
 # pixel size will be selected. If you have a high dpi display where 1pt = 2px
@@ -223,7 +224,7 @@ clipboard-write = allow
 # most cases.
 #
 # Changing this option at runtime only applies to new windows.
-macos-titlebar-style = tabs
+macos-titlebar-style = hidden
 
 # This will be used to set the `TERM` environment variable.
 # HACK: We set this with an `xterm` prefix because vim uses that to enable key
@@ -232,3 +233,7 @@ macos-titlebar-style = tabs
 # keyprotocol=ghostty:kitty`, however a bug in the implementation prevents it
 # from working properly. https://github.com/vim/vim/pull/13211 fixes this.
 term = xterm-ghostty
+
+
+font-feature = dlig ss05 liga
+shell-integration = zsh
