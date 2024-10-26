@@ -191,6 +191,16 @@ run = ['layout floating', 'move-node-to-workspace Chats']
 if.app-id = 'com.apple.mail'
 run = ['layout floating', 'move-node-to-workspace Chats']
 
+[[on-window-detected]]
+if.app-id = 'com.linear'
+run = ['layout floating', 'move-node-to-workspace Chats']
+
+[[on-window-detected]]
+if.app-id = 'com.alibaba.DingTalkMac'
+run = ['layout floating', 'move-node-to-workspace Chats']
+
+
+
 ## Browsers
 
 [[on-window-detected]]
