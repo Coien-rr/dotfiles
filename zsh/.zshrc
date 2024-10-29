@@ -1,6 +1,5 @@
 # alias
 alias vi="nvim"
-alias reload="source ~/.zshrc"
 alias lsl="eza -l --icons"
 alias lsa="eza -l -a --icons"
 alias ls="eza --icons"
@@ -32,11 +31,11 @@ zinit ice depth=1 atload"!source ~/.theme.zsh" lucid nocd
 zinit light romkatv/powerlevel10k
 
 # # #=== OH-MY-ZSH & PREZTO PLUGINS =======================
-# zinit for \
-#       OMZL::{'history','completion','git','grep','key-bindings'}.zsh
-#
-# zinit wait lucid for \
-#       OMZP::{'extract','fzf','git','sudo'}
+zinit for \
+      OMZL::{'history','completion','git','grep','key-bindings'}.zsh
+
+zinit wait lucid for \
+      OMZP::{'extract','fzf','git','sudo'}
 
 # Plugins
 zinit ice depth=1 wait lucid
@@ -58,6 +57,37 @@ zinit ice depth=1 wait"2" lucid
 zinit light hlissner/zsh-autopair
 
 zinit load atuinsh/atuin
+
+# reload zsh after update config
+reload() {
+    source ~/.zshrc
+    source ~/.zshenv
+    source ~/.theme.zsh
+}
+
+# attach target tmux session 
+ta() {
+    local target_session="$1"
+
+    if ! command -v tmux &> /dev/null; then
+        echo "tmux is not installed."
+        return 1
+    fi
+
+    if tmux has-session -t "$target_session" 2>/dev/null; then
+        tmux a -t "$target_session"
+    else
+        highlight_green="\e[1;32m"
+        reset_color="\e[0m"
+        echo -n "TUMX Session '${highlight_green}${target_session}${reset_color}' does not exist. Create it? [y/N]: "
+        read create_new
+        if [[ "$create_new" =~ ^[Yy]$ ]]; then
+            tmux new -s "$target_session"
+        else
+            echo "Aborted."
+        fi
+    fi
+}
 
 # create tmux new session with window name
 tn() {
@@ -132,4 +162,6 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+. "$HOME/.atuin/bin/env"
 
+eval "$(atuin init zsh)"
