@@ -49,13 +49,15 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 #                 In this example, 24 is a default value when there is no match.
 #                 Monitor pattern is the same as for 'workspace-to-monitor-force-assignment'.
 #                 See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
+
+# For Mac-Mini in Lab
 [gaps]
 inner.horizontal = 5
 inner.vertical =   5
-outer.left =       3
-outer.bottom =     1
-outer.top =        0
-outer.right =      3 
+outer.left =       4
+outer.bottom =     2
+outer.top =        3
+outer.right =      5
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -197,6 +199,10 @@ run = ['layout floating', 'move-node-to-workspace Chats']
 
 [[on-window-detected]]
 if.app-id = 'com.alibaba.DingTalkMac'
+run = ['layout floating', 'move-node-to-workspace Chats']
+
+[[on-window-detected]]
+if.app-id = 'com.electron.lark'
 run = ['layout floating', 'move-node-to-workspace Chats']
 
 
